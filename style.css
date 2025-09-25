@@ -1,0 +1,95 @@
+body {
+  background-image: url("./imgs/background.gif");
+  background-size: cover;
+  background-attachment: fixed;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  background: linear-gradient(135deg, rgb(255, 188, 231), rgb(255, 88, 180));
+  width: 40%;
+  height: 300px;
+  z-index: 1;
+  text-align: center;
+  box-shadow: 0px 8px 15px rgba(0, 170, 255, 0.8);
+  border-radius: 20px;
+  padding: 20px;
+  border: 3px solid rgb(0, 170, 255);
+  animation: float 3s ease-in-out infinite;
+}
+
+#imgPokemon {
+  display: block;
+  width: 180px;
+  margin: 0 auto;
+  filter: drop-shadow(0px 0px 8px rgba(255, 209, 254, 0.7));
+}
+
+#input {
+  border-radius: 12px;
+  margin-top: 40px;
+  padding: 10px;
+  background-color: rgba(252, 211, 247, 0.9);
+  border: 3px solid rgb(90, 23, 236);
+  text-align: center;
+  font-size: 14px;
+  outline: none;
+  transition: 0.3s ease-in-out;
+  width: 80%;
+}
+
+#input::placeholder {
+  color: rgb(90, 23, 236);
+  font-weight: 800;
+  text-align: center;
+}
+
+#input:focus {
+  box-shadow: 0px 0px 12px rgb(90, 23, 236);
+}
+
+#back {
+  z-index: 0;
+  position: fixed;
+  margin-left: 350px;
+  margin-top: -250px;
+  width: 50%;
+}
+
+#escolher {
+  width: 80%;
+  margin-top: 20px;
+  background: linear-gradient(90deg, rgb(120, 129, 249), rgb(90, 23, 236));
+  color: white;
+  font-weight: 800;
+  border-radius: 50px;
+  border: 3px solid rgb(19, 0, 232);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+#escolher:hover {
+  background: rgb(252, 211, 247);
+  color: rgb(19, 0, 232);
+  transform: scale(1.05);
+  box-shadow: 0px 0px 12px rgba(0, 170, 255, 0.8);
+}
+
+#escolher:active {
+  filter: brightness(1.5);
+  transform: scale(0.9);
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
