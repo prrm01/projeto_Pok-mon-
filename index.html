@@ -1,27 +1,79 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet"  href="style.css">
-    <title>Encontre o pokemon</title>
+  <meta charset="UTF-8">
+  <title>Buscar Post</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <img src="./imgs/mewtow.gif" alt="" id="back">
-    <div class="container">
 
-        <input id="input" type="text" placeholder="digite o pokémon">
-        
-        </br>
-        <button  id="escolher" type="button" onclick="pokemon()">Escolher Pokémon</button>
-        <img src="" alt="imagem pokemon" id="imgPokemon" style="display:none">
-    </div>
-    
+  <header>
+    <h1>🔍 Buscar Post por ID</h1>
+  </header>
 
+  <div class="container">
+    <label for="input">Digite o ID do post (1 a 100):</label>
+    <input type="number" id="input" placeholder="Ex: 5" />
+    <div class="hint">Use a API JSONPlaceholder</div>
+    <button id="button">Buscar</button>
+    <div id="status"></div>
+    <div id="resultado"></div>
+  </div>
 
+  <div id="footer">
+    &copy; 2025 • Projeto Futurista com API JSONPlaceholder 🚀
+  </div>
 
+  <script>
+    const btn = document.getElementById('button');
+    const input = document.getElementById('input');
+    const status = document.getElementById('status');
+    const resultado = document.getElementById('resultado');
 
-    <script src="script.js"></script>
-    
+    const url = `https://jsonplaceholder.typicode.com/posts`;
+
+    async function buscarPost() {
+      try {
+        const id = input.value.trim();
+
+        resultado.innerHTML = ''; // limpa resultados anteriores
+        status.textContent = ''; // limpa status anterior
+
+        if (!id || isNaN(id)) {
+          status.textContent = "Digite um ID válido.";
+          status.className = "error";
+          return;
+        }
+
+        const resposta = await fetch(`${url}/${id}`, { method: 'GET' });
+
+        if (!resposta.ok) {
+          status.textContent = "Post não encontrado.";
+          status.className = "error";
+          return;
+        }
+
+        const conteudo = await resposta.json();
+
+        status.textContent = "Post encontrado.";
+        status.className = "";
+
+        resultado.innerHTML = `
+          <div class="conteudo">
+            <h3>#${conteudo.id} - ${conteudo.title}</h3> 
+            <p><strong>Autor:</strong> Usuário ${conteudo.userId}</p>
+            <p><strong>Conteúdo:</strong> ${conteudo.body}</p>
+          </div>
+        `;
+
+      } catch (e) {
+        status.textContent = "Erro ao buscar o post.";
+        status.className = "error";
+      }
+    }
+
+    btn.addEventListener('click', buscarPost);
+  </script>
+
 </body>
 </html>
